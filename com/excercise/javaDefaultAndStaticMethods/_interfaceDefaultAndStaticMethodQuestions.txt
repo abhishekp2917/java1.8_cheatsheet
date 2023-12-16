@@ -1,0 +1,86 @@
+*   What is default method in interface ?
+
+>>  A default method in an interface is a method that provides a default implementation within the interface itself. Before 
+    Java 8, interfaces could only declare method signatures, requiring implementing classes to provide the method's 
+    implementation. However, default methods allow interfaces to have method implementations.
+
+    Here's an example:
+
+    ```
+        public interface MyInterface {
+            // Regular method declaration without implementation
+            void regularMethod(); 
+
+            default void defaultMethod() {
+                // Default implementation provided here
+                System.out.println("This is a default implementation");
+            }
+        }
+    ```
+    
+    Classes implementing MyInterface can choose to override the default method or use it as is. If 
+    they don't override the default method, the interface's default implementation will be used.
+
+________________________________________________________________________________________________________________________
+
+*   Why there is a need of default method in interface ?
+
+>>  Default methods in Java interfaces serve a few important purposes:
+
+    (1) Backward compatibility: 
+    
+        They allow interfaces to evolve without breaking the implementing classes. Prior to Java 8, adding new methods 
+        to an interface would break all classes implementing that interface unless they were updated to provide an 
+        implementation for the new method. Default methods prevent this issue by offering a default implementation, 
+        allowing existing code to function without modifications.
+
+
+    (2) Code maintenance: 
+    
+        Default methods reduce redundancy by providing a default implementation that can be shared among multiple classes 
+        implementing the interface. This can help minimize code duplication and streamline development.
+    
+________________________________________________________________________________________________________________________
+
+*   Does method overriding and overloading applies to default method ?
+
+>>  Yes, method overriding and overloading applies to default method.
+
+________________________________________________________________________________________________________________________
+
+*   What will happen if a class implements 2 interfaces which has default method of same method signature ?
+
+>>  If a class implements two interfaces that have default methods with the same signature, the class must override the 
+    method explicitly to provide its own implementation.
+
+    For instance, let's say there is InterfaceA and InterfaceB having same default method sayHello()
+
+    ```
+        interface InterfaceA {
+            default void sayHello() {
+                System.out.println("Hello from InterfaceA");
+            }
+        }
+
+        interface InterfaceB {
+            default void sayHello() {
+                System.out.println("Hello from InterfaceB");
+            }
+        }
+    ```
+
+    Here, as implementing class implements both the interface, it arise a conflict. It can be resolved by overriding the 
+    default method 
+    
+        ```
+            class MyClass implements InterfaceA, InterfaceB {
+                // Conflict arises here as both interfaces provide a default method with the same signature
+                // This class must provide its own implementation to resolve the conflict
+                @Override
+                public void sayHello() {
+                    System.out.println("Hello from MyClass");
+                }
+            }
+
+        ```
+________________________________________________________________________________________________________________________
