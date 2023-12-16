@@ -1,0 +1,138 @@
+*   What is lambda expression ?
+
+>>  A lambda expression is a concise way to represent an anonymous function (function that doesn't have a name) and can 
+    be passed around as a variable. Lambda expressions were introduced to provide a more readable and efficient way to 
+    write code using functional programming concepts.
+
+    Here's the basic syntax of a lambda expression:
+
+    ```
+        (parameters) -> { body }
+    ```
+
+    Given below are some examples of lambda expression : 
+
+    (1) lambda expression without parameters that prints the number from 1 to 10.
+
+        ```
+            () -> {
+                for(int i=1, i<=10; i++) {
+                    System.out.println(i);
+                }
+            }
+        ```
+    
+    (2) lambda expression with parameters that takes 2 integer value and prints its sum.
+
+        ```
+            (int a, int b) -> {
+                int sum = a + b;
+                System.out.println(sum);
+            }
+        ```
+
+        It is not always necessary to specify parameter type. In some cases compiler can infer the type of argument
+        called as type inferences. For example, while using lambda expression as implementation of functional interface.
+
+        ```
+            (a, b) -> {
+                int sum = a + b;
+                System.out.println(sum);
+            }
+        ```
+
+    (3) lambda expression with one input parameter which prints the square of the number passed. In this case, we can 
+        ignore parameter curve braces as well as body curly braces because there is only one parameter and body has only 
+        one statement.
+
+        ```
+            a -> System.out.println(a*a);
+        ```
+
+    (4) lambda expression that takes string value as a parameter and returns length of the string.
+
+        ```
+            str -> {
+                return str.length();
+            }
+        ```
+
+        since there is only one statement inside the body, we can ignore the curly braces.
+
+        ```
+            str -> return str.length();
+        ```
+
+        since return statement is the only statement here, we can ignore the return keyword also
+
+        ```
+            str -> str.length();
+        ```
+________________________________________________________________________________________________________________________
+
+*   What is functional interface ?
+
+>>  A functional interface in Java is an interface that contains exactly one abstract method. Functional interfaces 
+    serve as the foundation of lambda expressions and method references in Java. They allow the use of lambda expressions 
+    to provide the implementation for the single abstract method defined within the interface.
+
+    Some popular functional interfaces are Runnable, Comparator etc.
+________________________________________________________________________________________________________________________
+
+*   What is @FunctionalInterface annotation and why to use it ?
+
+>>  The @FunctionalInterface annotation is used to indicate that an interface is a functional interface.
+
+    The main purpose of the @FunctionalInterface annotation is to explicitly signal to the compiler that the interface 
+    is intended to be used as a functional interface. It helps avoid accidental addition of more abstract methods, thereby 
+    maintaining its contract of being a functional interface.
+
+    This annotation is not mandatory for a functional interface; it's just a marker for developers and the compiler. But 
+    using it is a good practice to clearly indicate the intention of the interface and to prevent accidental addition of 
+    extra abstract methods in the future.
+
+    Note : If an interface extends the interface that is marked with @FunctionalInterface annotation, then the child 
+    interface will not be checked by compiler to see if it conforms the property of functional interface or not.
+________________________________________________________________________________________________________________________
+
+*   How to store the lambda expression or where we can pass the lambda expression to use it ?
+
+>>  Lambda expressions in Java can be stored in variables of functional interface types or passed as arguments to methods 
+    that accept functional interfaces. 
+    
+    Here's an example:
+
+    Let's say you have a functional interface Operation with a single abstract method int operate(int a, int b):
+
+    ```
+        @FunctionalInterface
+        interface Operation {
+            int operate(int a, int b);
+        }
+    ```
+
+    You can store lambda expressions of this type in variables:
+
+    ```
+        Operation addition = (a, b) -> a + b;
+        Operation subtraction = (a, b) -> a - b;
+    ```
+
+    These lambda expressions can be passed as arguments to methods that accepts functional interface:
+
+    ```
+        int resultAddition = performOperation(addition, 5, 3);
+        int resultSubtraction = performOperation(subtraction, 8, 3);
+    
+        // Method that accepts a functional interface as an argument
+        static int performOperation(Operation op, int a, int b) {
+            return op.operate(a, b);
+        }
+    ```
+________________________________________________________________________________________________________________________
+
+*   What is the difference between anonymous inner class and lambda expression ?
+
+>>  
+
+
