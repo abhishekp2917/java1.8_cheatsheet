@@ -84,3 +84,49 @@ ________________________________________________________________________________
 
         ```
 ________________________________________________________________________________________________________________________
+
+*   What is static method in interface ?
+
+>>  Static methods in interfaces were introduced in Java 8. These methods are declared using the static keyword within an 
+    interface and provide utility or helper methods that are related to the interface but don't depend on any specific 
+    instance of the implementing class.
+
+    It is to be note that the static method of interface is not inherited by implementing class. Altough, it can have 
+    static method with same method signature as of interface.
+
+    Here's an example:
+
+    ```
+        interface MyInterface {
+            // Static method in an interface
+            static void staticMethod() {
+                System.out.println("This is a static method in MyInterface");
+            }
+        }
+
+        // Example of using a static method from the interface
+        class MyClass implements MyInterface {
+            public static void main(String[] args) {
+                // Calling the static method from the interface
+                MyInterface.staticMethod();
+            }
+        }
+    ```
+________________________________________________________________________________________________________________________
+
+*   What is the purpose of static method in interface ?
+
+>>  Reasons for using static methods in interfaces:
+
+    (1) Utility Methods: 
+    
+        Static methods in interfaces can provide utility functions related to the interface's functionality. These methods 
+        can be called directly using the interface name, without requiring an instance of the implementing class.
+
+    (2) Code Organization: 
+    
+        They aid in organizing code logically within the interface. When a method is closely associated with the interface 
+        itself and doesn't rely on any specific instance data, making it static keeps it clearly associated with the interface.
+        
+________________________________________________________________________________________________________________________
+
