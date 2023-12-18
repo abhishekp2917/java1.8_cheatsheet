@@ -1,0 +1,123 @@
+*   What are various predefined functional interface ?
+
+>>  In Java, functional interfaces represent a single abstract method (SAM) and can be used as the basis for lambda 
+    expressions or method references. Java offers several predefined functional interfaces in the java.util.function 
+    package, each designed for specific types of operations. Some common predefined functional interfaces include:
+
+    (1) Predicate: 
+        
+        Represents a predicate (boolean-valued function) of one argument.
+
+        Predicate<T>
+
+    (2) Consumer: 
+    
+        Represents an operation that accepts a single argument and returns no result.
+
+        Consumer<T>
+
+        BiConsumer<T, U>
+
+    (3) Function: 
+    
+        Represents a function that accepts one argument and produces a result.
+
+        Function<T, R>
+        BiFunction<T, U, R>
+        UnaryOperator<T>
+        BinaryOperator<T>
+
+    (4) Supplier: 
+    
+        Represents a supplier of results.
+
+        Supplier<T>
+
+    (5) UnaryOperator and BinaryOperator: 
+    
+        Special cases of functions that operate on one or two operands, respectively, and produce a result of the same type.
+
+        UnaryOperator<T>
+        BinaryOperator<T>
+
+    (6) BiPredicate: 
+    
+        Represents a predicate (boolean-valued function) of two arguments.
+
+        BiPredicate<T, U>
+    
+    (7) BiConsumer: 
+    
+        Represents an operation that accepts two arguments and returns no result.
+
+        BiConsumer<T, U>
+
+    (8) oXXXFunction and XXXToYYYFunction: 
+    
+        Converters between different types.
+
+        ToDoubleFunction<T>
+        ToIntFunction<T>
+        ToLongFunction<T>
+        IntToDoubleFunction
+        IntToLongFunction
+        LongToIntFunction
+
+    (9) Primitive Specializations: 
+    
+        Primitive type-specific functional interfaces that avoid boxing/unboxing overhead for primitive types.
+
+        IntPredicate, LongPredicate, DoublePredicate
+        IntConsumer, LongConsumer, DoubleConsumer
+        IntFunction<R>, LongFunction<R>, DoubleFunction<R>
+        IntUnaryOperator, LongUnaryOperator, DoubleUnaryOperator
+        IntBinaryOperator, LongBinaryOperator, DoubleBinaryOperator
+        IntSupplier, LongSupplier, DoubleSupplier
+        ObjIntConsumer<T>, ObjLongConsumer<T>, ObjDoubleConsumer<T>
+
+________________________________________________________________________________________________________________________
+
+*   What is Predicate interface ?
+
+>>  The Predicate interface is a functional interface in Java that's a part of the java.util.function package. It's used 
+    to represent a boolean-valued function of one argument.
+
+    It has a single abstract method named test(T t), where T is the type of the input argument to the predicate. This 
+    method takes an argument and returns a boolean value based on some condition.
+
+    ```
+        Predicate<Integer> isEven = num -> num % 2 == 0;
+        boolean result = isEven.test(5); 
+    ```
+________________________________________________________________________________________________________________________
+
+*   What are various default methods in Predicate interface ?
+
+>>  There are mainly 3 default methods in Predicate interface :
+
+    (1) and(Predicate<T> predicate): 
+    
+        This method returns a composed predicate that represents a logical AND of this predicate and another.
+
+    (2) or(Predicate<T> predicate): 
+    
+        Returns a composed predicate that represents a logical OR of this predicate and another.
+
+    (3) negate(): 
+    
+        This method returns a predicate that represents the logical negation of this predicate.
+
+________________________________________________________________________________________________________________________
+
+*   What are various static method in Predicate interface ?
+
+>>  Given below is the static method of Predicate interface :
+
+    (1) isEqual(Object object):
+
+        This method accepts object type as an argument and returns a Predicate which will test if the object passed to 
+        test() is equal to the obejct passed to isEqual() by calling 'object.equals()'
+
+________________________________________________________________________________________________________________________
+
+     
