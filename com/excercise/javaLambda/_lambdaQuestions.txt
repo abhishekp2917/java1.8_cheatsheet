@@ -133,6 +133,35 @@ ________________________________________________________________________________
 
 *   What is the difference between anonymous inner class and lambda expression ?
 
->>  
+>>              
+                Anonymous inner class                                   Lambda expression    
+
+    It is a class without name                      |   It is a function without name
+                                                    |
+    Annonymous inner class can extend abstract and  |   Lambda expression can't extend abstract and concrete class
+    concrete class                                  |
+                                                    |
+    Annonymous inner class can extend interface     |   Lambda expression can extend interface having only one abstract
+    having any number of abstract method            |   method i.e functional interface
+                                                    |
+                                                    |
+    Inside anonymous inner class, we can declare    |   Inside lambda expression, we can't decalre instance variable. 
+    instance variables                              |   Whatever variable declared inside it are considered as local variable
+                                                    |
+                                                    |
+    Inside anonymous inner class, this always refers|   Inside lambda expression this always refers to outer class object
+    to current anonymous class object but not outer |
+    class object                                    |
+                                                    |
+    For the anonymous inner class, at the time of   |   For lambda expression, at the time of compilation no separate 
+    compilation a separate .class file object will  |   .class file  will be generated
+    be generated                                    |
+                                                    |
+________________________________________________________________________________________________________________________
+                                        
+                                            
+
+
+
 
 
