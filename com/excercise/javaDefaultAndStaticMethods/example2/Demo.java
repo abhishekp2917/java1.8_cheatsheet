@@ -1,5 +1,6 @@
 /*
-    code to demonstrate how using annonymous inner class makes code lengthy
+    code to demonstrate how to resolve default method conflict in case a class implements 2 interface which has 
+    default method with same default method signature
 */
 
 package com.excercise.javaDefaultAndStaticMethods.example2;

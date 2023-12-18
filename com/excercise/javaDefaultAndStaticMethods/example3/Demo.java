@@ -1,5 +1,5 @@
 /*
-    code to demonstrate how to deal with default method of interface 
+    code to demonstrate how to deal with static method of interface 
 */
 
 package com.excercise.javaDefaultAndStaticMethods.example3;
