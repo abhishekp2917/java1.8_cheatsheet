@@ -8,24 +8,17 @@
         
         Represents a predicate (boolean-valued function) of one argument.
 
-        Predicate<T>
-
     (2) Consumer: 
     
         Represents an operation that accepts a single argument and returns no result.
 
         Consumer<T>
 
-        BiConsumer<T, U>
-
     (3) Function: 
     
         Represents a function that accepts one argument and produces a result.
 
         Function<T, R>
-        BiFunction<T, U, R>
-        UnaryOperator<T>
-        BinaryOperator<T>
 
     (4) Supplier: 
     
@@ -45,14 +38,20 @@
         Represents a predicate (boolean-valued function) of two arguments.
 
         BiPredicate<T, U>
+
+    (7) BiFunction:
     
-    (7) BiConsumer: 
+        Represents a Function of two arguments. 
+
+        BiFunction<T, U, R>
+    
+    (8) BiConsumer: 
     
         Represents an operation that accepts two arguments and returns no result.
 
         BiConsumer<T, U>
 
-    (8) oXXXFunction and XXXToYYYFunction: 
+    (9) oXXXFunction and XXXToYYYFunction: 
     
         Converters between different types.
 
@@ -63,7 +62,7 @@
         IntToLongFunction
         LongToIntFunction
 
-    (9) Primitive Specializations: 
+    (10) Primitive Specializations: 
     
         Primitive type-specific functional interfaces that avoid boxing/unboxing overhead for primitive types.
 
@@ -164,4 +163,53 @@ ________________________________________________________________________________
         ```
             static <T> Function<T, T> identity()
         ```
+________________________________________________________________________________________________________________________
+
+*   What is Consumer interface ?
+
+>>  The Consumer interface is a part of the java.util.function package introduced in Java 8. It represents a function 
+    that accepts one argument but doesn't return anything. It's a functional interface, meaning it has a single abstract method 
+    (accept) that needs to be implemented, making it suitable for lambda expressions and method references.
+     
+    The Consumer interface is parameterized with one type: the input type (T)
+    The method it defines is:
+
+    ```
+        accept(T t);
+    ```
+
+    ```
+        Consumer<Integer> print = num -> System.out.println("The number is : " + num);
+        print.accept(5); 
+    ```
+________________________________________________________________________________________________________________________
+
+*   What are various default methods in Consumer interface ?
+
+>>  There is only 1 default method in Consumer interface : 
+
+    (1) default Consumer<T> andThen(Consumer<T> after): 
+        
+        This method combines the current function with another function, executing the current function first and then 
+        the second function.
+
+________________________________________________________________________________________________________________________
+
+*   What is Supplier interface ?
+
+>>  The Supplier interface is a part of the java.util.function package. It represents a function that doesn't accepts any 
+    argument but return something. It's a functional interface, meaning it has a single abstract method (get) that needs 
+    to be implemented, making it suitable for lambda expressions and method references.
+     
+    The Consumer interface is parameterized with one type: the return type (R)
+    The method it defines is:
+
+    ```
+        R get();
+    ```
+
+    ```
+        Supplier<Integer> getRandomNum = () -> Math.random()*10;
+        System.out.println(getRandomNum.get()); 
+    ```
 ________________________________________________________________________________________________________________________
