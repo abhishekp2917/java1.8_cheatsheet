@@ -95,21 +95,21 @@ ________________________________________________________________________________
 
 >>  There are mainly 3 default methods in Predicate interface :
 
-    (1) and(Predicate<T> predicate): 
+    (1) default Predicate<T> and(Predicate<T> predicate): 
     
         This method returns a composed predicate that represents a logical AND of this predicate and another.
 
-    (2) or(Predicate<T> predicate): 
+    (2) default Predicate<T> or(Predicate<T> predicate): 
     
         Returns a composed predicate that represents a logical OR of this predicate and another.
 
-    (3) negate(): 
+    (3) default Predicate<T> negate(): 
     
         This method returns a predicate that represents the logical negation of this predicate.
 
 ________________________________________________________________________________________________________________________
 
-*   What are various static method in Predicate interface ?
+*   What are various static methods in Predicate interface ?
 
 >>  Given below is the static method of Predicate interface :
 
@@ -120,4 +120,48 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
 
+*   What is Function interface ?
+
+>>  The Function interface is a part of the java.util.function package introduced in Java 8. It represents a function 
+    that accepts one argument and produces a result. It's a functional interface, meaning it has a single abstract method 
+    (apply) that needs to be implemented, making it suitable for lambda expressions and method references.
      
+    The Function interface is parameterized with two types: the input type (T) and the output type (R). 
+    The method it defines is:
+
+    ```
+        R apply(T t);
+    ```
+
+    ```
+        Function<Integer, Integer> cube = num -> num*num*num;
+        int result = cube.apply(5); 
+    ```
+________________________________________________________________________________________________________________________
+
+*   What are various default methods in Function interface ?
+
+>>  There are mainly 2 default methods in Function interface : 
+
+    (1) default Function<T, R> andThen(Function<T, R> after): 
+        
+        This method combines the current function with another function, applying the current function first and then 
+        the second function on the result.
+
+    (2) default Function<T, R> compose(Function<T, R> before): 
+    
+        This method returns a composed function that first applies the parameter function and then applies the current 
+        function.
+
+________________________________________________________________________________________________________________________
+
+*   What are various static methods in Function interface ?
+
+>>  Given below is the static method of Function interface :  
+
+    (1) identity: This method returns a function that always returns its input argument.
+
+        ```
+            static <T> Function<T, T> identity()
+        ```
+________________________________________________________________________________________________________________________
