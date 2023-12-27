@@ -2,7 +2,7 @@
     code to demonstrate @FunctionalInterface annotation
 */
 
-package com.excercise.javaLambda.functionalInterface.example1;
+package com.excercise.lambda.functionalInterface.example1;
 
 public class Demo {
 

@@ -2,7 +2,7 @@
     code to demonstrate how to not using lambda expression with Collections makes the code lengthy
 */
 
-package com.excercise.javaLambda.lambdaWithFunctionalInterface.example2;
+package com.excercise.lambda.lambdaWithFunctionalInterface.example2;
 
 import java.util.ArrayList;
 import java.util.Collections;

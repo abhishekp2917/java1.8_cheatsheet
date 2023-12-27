@@ -2,7 +2,7 @@
     code to demonstrate how to deal with static method of interface 
 */
 
-package com.excercise.javaDefaultAndStaticMethods.example3;
+package com.excercise.defaultAndStaticMethods.example3;
 
 public class Demo {
 

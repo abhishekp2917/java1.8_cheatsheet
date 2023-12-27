@@ -1,4 +1,4 @@
-package com.excercise.javaDefaultAndStaticMethods.example2;
+package com.excercise.defaultAndStaticMethods.example2;
 
 public interface MyInterfaceB {
     

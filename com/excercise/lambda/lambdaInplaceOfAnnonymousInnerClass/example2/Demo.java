@@ -2,7 +2,7 @@
     code to demonstrate how can we use lambda expression inplace of annonymous inner class
 */
 
-package com.excercise.javaLambda.lambdaInplaceOfAnnonymousInnerClass.example2;
+package com.excercise.lambda.lambdaInplaceOfAnnonymousInnerClass.example2;
 
 public class Demo {
 

@@ -1,4 +1,4 @@
-package com.excercise.javaLambda.lambdaWithFunctionalInterface.example2;
+package com.excercise.lambda.lambdaWithFunctionalInterface.example2;
 
 public class Student {
 

@@ -4,7 +4,7 @@
     this will show how lambda expression shortens the code length of functional interface
 */
 
-package com.excercise.javaLambda.lambdaWithFunctionalInterface.example1;
+package com.excercise.lambda.lambdaWithFunctionalInterface.example1;
 
 public class Demo {
 

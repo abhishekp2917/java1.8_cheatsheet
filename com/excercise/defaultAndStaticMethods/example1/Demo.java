@@ -2,7 +2,7 @@
     code to demonstrate how to deal with default method of interface 
 */
 
-package com.excercise.javaDefaultAndStaticMethods.example1;
+package com.excercise.defaultAndStaticMethods.example1;
 
 public class Demo {
 

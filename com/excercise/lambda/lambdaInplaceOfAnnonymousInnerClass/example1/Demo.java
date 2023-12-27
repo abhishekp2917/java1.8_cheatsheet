@@ -2,7 +2,7 @@
     code to demonstrate how using annonymous inner class makes code lengthy
 */
 
-package com.excercise.javaLambda.lambdaInplaceOfAnnonymousInnerClass.example1;
+package com.excercise.lambda.lambdaInplaceOfAnnonymousInnerClass.example1;
 
 public class Demo {
 
