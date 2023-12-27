@@ -1,0 +1,81 @@
+*   What is method Reference ?
+
+>>  In Java, method references provide a shorthand syntax for writing lambda expressions by referencing methods directly. 
+    They are a way to refer to methods without executing them. Method references are often more concise and readable than 
+    lambda expressions when you're simply calling another method.
+
+    It is to be noted that abstract method of functional interface and referring method must have same input parameter type
+    and return type.
+
+    There are different types of method references:
+
+    (1) Reference to a Static Method:
+
+        Syntax: ClassName::staticMethodName
+
+        ```
+            Function<Integer, String> converter = String::valueOf;
+            String result = converter.apply(10);
+        ```
+
+    (2) Reference to an Instance Method of a Particular Object:
+
+        Syntax: objectInstance::instanceMethodName
+
+        ```
+            String text = "Hello";
+            Consumer<String> printer = System.out::println;
+            printer.accept(text);
+        ```
+________________________________________________________________________________________________________________________
+
+*   What is constructor reference ?
+
+>>  Constructor references in Java are similar to method references but are used to refer to constructors instead of 
+    methods. They provide a way to instantiate objects by referring to a constructor directly. Constructor references are 
+    commonly used in functional programming, especially when working with functional interfaces that involve constructors.
+
+    It is to be noted that abstract method of functional interface and referring constructor must have same input parameter
+    and the return type of the functional interface's method should match the type of object created by the constructor 
+    reference being used.
+
+    Syntax: ClassName::new
+
+    (1) Reference to a Constructor of a Class:
+
+        ```
+            Supplier<String> supplier = String::new;
+            String emptyString = supplier.get();
+        ```
+
+    (2) Reference to a Parameterized Constructor:
+
+        ```
+            Function<Integer, List<String>> listSupplier = ArrayList<String>::new;
+            List<String> newList = listSupplier.apply(10); 
+        ```
+
+    (3) Reference to a Constructor of a Custom Class:
+
+        ```
+            class MyClass {
+                private String message;
+
+                public MyClass(String message) {
+                    this.message = message;
+                }
+
+                public String getMessage() {
+                    return message;
+                }
+            }
+        ```
+
+        Using constructor reference with a functional interface Function
+
+        ```
+            Function<String, MyClass> myClassConstructor = MyClass::new;
+            MyClass instance = myClassConstructor.apply("Hello"); 
+            System.out.println(instance.getMessage()); 
+        ```
+________________________________________________________________________________________________________________________
