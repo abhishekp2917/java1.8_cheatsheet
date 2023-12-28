@@ -1,0 +1,230 @@
+*   What is Streams ?
+
+>>  In Java, Streams represent a sequence of elements that can be processed in a declarative and functional way. Introduced 
+    in Java 8, the Stream API provides a new abstraction to work with collections of objects, allowing concise and efficient 
+    manipulation of data.
+
+    Key Characteristics of Streams:
+
+    (1) Sequence of Elements: 
+    
+        Streams represent a sequence of elements that can come from various sources, including collections, arrays, I/O 
+        channels, etc.
+
+    (2) Functional Approach: 
+    
+        Streams support functional-style operations, enabling developers to express transformations on data without 
+        explicitly writing loops or iterations.
+
+    (3) Laziness: 
+    
+        Stream operations can be lazy or eager. Intermediate operations like filter, map, sorted, etc., are lazily executed, 
+        which means they're postponed until a terminal operation triggers them.
+
+    (4) Pipeline Operations: 
+    
+        Stream operations can be chained together to form pipelines, where the output of one operation feeds as input to 
+        another.
+
+    (5) Immutable: 
+    
+        Streams do not modify the underlying data source. Instead, they produce new streams or collections after 
+        performing operations.
+________________________________________________________________________________________________________________________
+
+*   What are various intermediate methods in streams ?
+
+>>  Intermediate methods perform operations on a stream and return a new stream as the result.
+
+    They're often lazy, meaning they don't execute immediately. Instead, they wait for a terminal operation to trigger 
+    the execution.
+
+    Multiple intermediate operations can be chained together to form a pipeline.
+
+    Examples: filter, map, sorted, distinct, limit, skip, etc.
+
+    Let's consider a list of Person objects with attributes like name, age, and gender.
+
+    ```
+        class Person {
+            private String name;
+            private int age;
+            private String gender;
+
+            public Person(String name, int age, String gender) {
+                this.name = name;
+                this.age = age;
+                this.gender = gender;
+            }
+
+            // Getters for attributes
+            // ...
+        }
+    ```
+
+    Example List of Persons:
+
+    ```
+        List<Person> persons = Arrays.asList(
+            new Person("Alice", 25, "Female"),
+            new Person("Bob", 30, "Male"),
+            new Person("Charlie", 28, "Male"),
+            new Person("David", 22, "Male"),
+            new Person("Emma", 27, "Female")
+        );
+    ```
+
+    Examples of Intermediate Operations:
+
+    (1) filter() :
+    
+        Filters elements based on a provided predicate. It retains only elements that satisfy the given condition. The 
+        resultant list might not have same number of elements as initial list.
+    
+        ```
+            // Filter persons older than 25
+            List<Person> personsOlderThan25 = persons.stream()
+                .filter(person -> person.getAge() > 25)
+                .collect(Collectors.toList());
+        ```
+
+    (2) map() :
+        
+        Transforms each element in the stream using the provided function by performing the operation on the elements. The
+        resultant list will have same number of elements as initial list.
+    
+        ```
+            // Map person names to uppercase
+            List<String> uppercaseNames = persons.stream()
+                .map(person -> person.getName().toUpperCase())
+                .collect(Collectors.toList());
+        ```
+
+    (3) sorted() :
+
+        Sorts elements according to a provided comparator.
+    
+        ```
+            // Sort persons by age in descending order
+            List<Person> personsSortedByAgeDesc = persons.stream()
+                .sorted((p1, p2) -> Integer.compare(p2.getAge(), p1.getAge()))
+                .collect(Collectors.toList());
+        ```
+    
+    (4) distinct() : Removes duplicate elements from the colection
+    
+        ```
+            // Get distinct gender values
+            List<String> distinctGenders = persons.stream()
+                .map(Person::getGender)
+                .distinct()
+                .collect(Collectors.toList());
+        ```
+
+    (5) limit() :
+     
+        Limits the amount of elements in the stream to first N numbers.
+    
+        ```
+            // Limit to first 3 persons
+            List<Person> firstThreePersons = persons.stream()
+                .limit(3)
+                .collect(Collectors.toList());
+        ```
+    
+    (6) skip() :
+
+        Skips the first N elements in the stream
+
+        ```
+            // Skip the first 2 persons
+            List<Person> skippedPersons = persons.stream()
+                .skip(2)
+                .collect(Collectors.toList());
+        ```
+________________________________________________________________________________________________________________________
+
+*   What are various terminal methods in streams ?
+
+>>  Terminal methods produce a result or a side effect and close the stream, triggering its execution.
+
+    They cause the intermediate operations in the pipeline to start processing.
+
+    Examples: collect, forEach, reduce, anyMatch, allMatch, noneMatch, etc.
+
+    (1) collect() :
+    
+        Collects the elements of the stream into a data structure specified by a Collector.
+
+        ```
+            // Collect names of persons into a List
+            List<String> namesList = persons.stream()
+                .map(Person::getName)
+                .collect(Collectors.toList());
+        ```
+
+    (2) forEach() :
+        
+        Performs an action for each element in the stream without returning any result.
+
+        ```
+            // Print names of all persons
+            persons.stream()
+                .map(Person::getName)
+                .forEach(System.out::println);
+        ```
+
+    (3) count() :
+
+        Counts the number of elements in the stream.
+
+        ```
+            // Counts the number of Person aged above 30
+            long count = persons.stream()
+                    .filter(person -> person.getAge() > 30)
+                    .count();
+        ```
+    
+    (4) reduce() :
+    
+        Performs a reduction on the elements.
+            
+        ```
+            // Calculate total age of all persons using reduce
+            int totalAge = persons.stream()
+                .map(Person::getAge)
+                .reduce(0, Integer::sum);
+        ```
+
+    (5) anyMatch(), allMatch(), noneMatch() : 
+    
+        Checks for certain conditions within the stream and returns boolean value.
+
+        ```
+            // Check if any person is older than 30
+            boolean anyPersonOlderThan30 = persons.stream()
+                .anyMatch(person -> person.getAge() > 30);
+        ```
+
+        ```
+            // Check if all persons are females
+            boolean allPersonsAreFemales = persons.stream()
+                .allMatch(person -> person.getGender().equals("Female"));
+        ```
+
+        ```
+            // Check if none of the persons are younger than 20
+            boolean noneYoungerThan20 = persons.stream()
+                .noneMatch(person -> person.getAge() < 20);
+        ```
+    
+    (6) toArray():
+    
+        Collects the elements of the stream into an array.
+        
+        ```
+            Person[] personsAbove30 = persons.stream()
+                .filter(person -> person.getAge() > 30)
+                .toArray(Person[]::new);
+        ```
+________________________________________________________________________________________________________________________
