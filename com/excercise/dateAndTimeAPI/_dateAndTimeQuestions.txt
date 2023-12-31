@@ -1,0 +1,57 @@
+*   Explain date and time API ?
+
+>>  The DateTime API in Java, introduced in Java 8, resides in the java.time package and provides classes to work with 
+    dates, times, durations, and more. Here are some key classes and concepts within the DateTime API:
+
+    (1) LocalDate, LocalTime and LocalDateTime :
+
+        Represent dates, times, or both without timezones respectively.
+
+        LocalDate: Represents a date (year, month, day).
+        LocalTime: Represents a time (hours, minutes, seconds, nanoseconds).
+        LocalDateTime: Represents a date and time.
+
+        ```
+            LocalDate today = LocalDate.now(); // Current date
+            LocalTime now = LocalTime.now(); // Current time
+            LocalDateTime currentDateTime = LocalDateTime.now(); // Current date and time
+        ```
+
+
+    (2) ZonedDateTime :
+
+        Represents date and time with a specific timezone. Allows conversions between different timezones.
+
+        In Java's java.time package, ZoneId is a class that represents a time zone identifier. It uniquely identifies 
+        different regions in the world where the same standard time is used. Instances of ZoneId are used to convert 
+        between Instant (a point in time) and ZonedDateTime (a date-time with a time zone).
+
+        You can create a ZoneId by using its static factory method of() with a valid timezone identifier:
+
+        ```
+            ZoneId zoneId = ZoneId.of("Europe/London"); // Create a ZoneId for London timezone
+            ZonedDateTime londonDateTime = ZonedDateTime.now(zoneId); // Current date and time with London timezone
+        ```
+
+    (3) Duration, Period :
+
+        Duration: Represents a time-based amount, like "2 hours and 30 minutes."
+        Period: Represents a date-based amount, like "2 years and 3 months."
+
+        ```
+            Duration duration = Duration.ofHours(2).plusMinutes(30); // 2 hours 30 minutes
+            Period period = Period.ofYears(2).plusMonths(3); // 2 years 3 months
+        ```
+
+    (4) Parsing and Formatting :
+
+        DateTimeFormatter: Formats and parses dates and times.
+        
+        ```
+            LocalDateTime dateTime = LocalDateTime.parse("2023-12-19T12:00:00");
+            String formattedDate = dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        ```
+________________________________________________________________________________________________________________________
+
+
+
