@@ -30,6 +30,7 @@
     
         Streams do not modify the underlying data source. Instead, they produce new streams or collections after 
         performing operations.
+
 ________________________________________________________________________________________________________________________
 
 *   What are various intermediate methods in streams ?
@@ -142,6 +143,7 @@ ________________________________________________________________________________
                 .skip(2)
                 .collect(Collectors.toList());
         ```
+
 ________________________________________________________________________________________________________________________
 
 *   What are various terminal methods in streams ?
@@ -227,4 +229,167 @@ ________________________________________________________________________________
                 .filter(person -> person.getAge() > 30)
                 .toArray(Person[]::new);
         ```
+
+________________________________________________________________________________________________________________________
+
+*   What are various Collectors in Streams ?
+
+>>  Let say there is a collection of Item object:
+
+        Item.class:
+
+            ```
+                class Item {
+                    String name;
+                    String category;
+                    int price;
+
+                    Item(String name, String category, int price) {
+                        this.name = name;
+                        this.category = category;
+                        this.price = price;
+                    }
+
+                    public String getName() { return name; }
+                    public String getCategory() { return category; }
+                    public int getPrice() { return price; }
+                }
+            ```
+
+        Item List:
+
+            ```
+                List<Item> items = List.of(
+                    new Item("Apple", "Fruit", 50),
+                    new Item("Banana", "Fruit", 30),
+                    new Item("Carrot", "Vegetable", 25),
+                    new Item("Potato", "Vegetable", 20),
+                    new Item("Orange", "Fruit", 50)
+                );
+            ```
+
+    (1) toList():
+        
+        - Collects all elements from the stream and stores them in a List.
+
+            ```
+                List<String> names = items.stream().map(Item::getName).collect(Collectors.toList());
+            ```
+
+    (2) toSet():
+
+        - Collects the stream elements into a Set, removing any duplicate values automatically.
+
+            ``` 
+                Set<String> categories = items.stream().map(Item::getCategory).collect(Collectors.toSet());
+            ```
+
+    (3) toCollection():
+
+        - Allows you to specify a custom collection (like LinkedList, TreeSet, etc.) into which the results will be gathered.
+
+            ```
+                LinkedList<String> linkedNames = items.stream().map(Item::getName).collect(
+                    Collectors.toCollection(LinkedList::new)
+                );
+            ```
+
+    (4) toMap():
+
+        - Collects elements into a Map<K, V> by providing key and value mapping functions.
+            
+        - If duplicate keys occur, you must provide a merge function.
+
+            ```
+                Map<String, Integer> nameToPrice = items.stream().collect(Collectors.toMap(
+                    item -> item.getName(), 
+                    item -> item.getPrice()
+                ));
+            ```
+
+    (5) groupingBy():
+
+        - Groups the elements of the stream by a classifier function and stores them in a Map<K, List<V>>.
+        
+        - The key is the return value of "item -> item.getCategory()" i.e., the item's category ("Fruit", "Vegetable").
+
+        - The value is a List<Item> for each key.
+
+            ```
+                Map<String, List<Item>> groupedByCategory = items.stream().collect(
+                    Collectors.groupingBy(item -> item.getCategory())
+                );
+            ```
+
+    (6) partitioningBy():
+
+        - Divides elements into two groups based on a predicate.
+
+        - It would always have two keys i.e true and false. 
+
+            ```
+                Map<Boolean, List<Item>> expensivePartition = items.stream().collect(
+                    Collectors.partitioningBy(item -> item.getPrice() > 30)
+                );
+            ```
+
+    (7) joining():
+
+        - Joins elements into a single String. You can optionally provide a delimiter, prefix, and suffix.
+
+        - First param in joining() is delimiter, second is prefix and third is suffix of resultant string.
+
+            ```
+                String joinedNames = items.stream().map(item -> item.getName()).collect(
+                    Collectors.joining(", ", "[", "]")
+                );
+            ```
+
+________________________________________________________________________________________________________________________
+
+*   Can we reference outer variable inside Streams or Lambda function ?
+
+>>  You can reference outer variables only if they are effectively final — meaning they are not reassigned after initialization.
+    
+    You cannot reassign any outer variable (primitive or object reference) inside a lambda or stream.
+
+    You can modify the internal state/properties of an outer object, because you are not changing the reference itself.
+    
+    Examples
+        
+        (1) Reassigning (Not Allowed):
+
+            - Outer variable used in lambda can not be reassigned
+            
+                ```
+                    int sum = 0;
+                    list.forEach(i -> sum += i); 
+                ```
+
+        (2) Referencing (Allowed):
+
+            - Outer variable can be referenced inside in lambda as long as they are not reassigned.
+
+                ```
+                    int threshold = 10; // effectively final
+                    list.stream().filter(i -> i > threshold).forEach(System.out::println); 
+                ```
+
+        (3) Mutating internal state (Allowed):
+
+            - List 'result' is not reassigned, only mutated by changing it's property which is allowed.
+
+                ```
+                    List<Integer> result = new ArrayList<>();
+                    list.forEach(i -> result.add(i)); 
+                ```
+        (4) Reassigning object reference (Not Allowed):
+
+            - Similar to primitive data type, reassigning of object reference is also not allowed.
+
+                ```
+                    List<Integer> result = new ArrayList<>();
+                    list.forEach(i -> result = new ArrayList<>()); 
+                ```
+                
 ________________________________________________________________________________________________________________________
