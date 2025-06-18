@@ -1,0 +1,152 @@
+*   What is Optional<T> in Java ?
+
+>>  Optional is a container object introduced in Java 1.8, which may or may not contain a non-null value. 
+    
+    Purpose:
+
+        - Before Optional, null checks were done manually.
+
+        - This leads to verbose code and potential NullPointerException.
+
+        - Optional was introduced to avoid null checks and make APIs more expressive.
+
+            ```
+                if (user != null && user.getAddress() != null) {
+                    System.out.println(user.getAddress().getCity());
+                }
+            ```
+
+    Example:
+
+        ```
+            Optional<String> name = Optional.of("John");
+
+            if (name.isPresent()) {
+                System.out.println("Hello, " + name.get());
+            }
+        ```
+
+________________________________________________________________________________________________________________________
+
+*   What are various ways to create Optional<T> ?
+
+>>  (1) Optional.of(T value):
+
+        - Creates an Optional with a non-null value.
+
+        - Throws NullPointerException if value is null.
+
+            ```
+                // Optional contains: "John"
+                Optional<String> name = Optional.of("John");
+
+                // Throws NullPointerException as null is passed as a value
+                Optional<String> error = Optional.of(null); 
+            ```
+
+    (2) Optional.ofNullable(T value):
+
+        - Creates an Optional with a value that may be null.
+
+        - Returns Optional.empty() if value is null.
+
+            ```
+                // Optional contains: "Abhishek"
+                Optional<String> name = Optional.ofNullable("Abhishek");
+                
+                // this contains Optional.empty
+                Optional<String> empty = Optional.ofNullable(null);
+            ```
+
+    (3) Optional.empty():
+
+        - Creates an explicitly empty Optional.
+
+        - No value is present.
+
+            ```
+                Optional<String> empty = Optional.empty();
+            ```
+
+________________________________________________________________________________________________________________________
+
+*   What are various common methods in Optional<T> ?
+
+>>  (1) Presence Checking:
+
+        (a) isPresent():
+            
+            - Returns true if value is present.
+
+                ```
+                    Optional<String> name = Optional.of("John");
+                    if (name.isPresent()) {
+                        System.out.println(name.get());  // prints "John"
+                    }
+                ```
+
+        (b) isEmpty():
+        
+            - Returns true if value is absent.
+
+                ```
+                    Optional<String> empty = Optional.empty();
+                    System.out.println(empty.isEmpty());  // true
+                ```
+
+    (2) Accessing the Value:
+
+        (a) get():
+
+            - Returns the value if present, or throws NoSuchElementException if empty.
+
+            - Avoid using directly without checking isPresent().
+
+                ```
+                    Optional<String> name = Optional.of("John");
+                    System.out.println(name.get());  // "John"
+                ```
+
+    (3) Providing Default Values:
+
+        (a) orElse(T other):
+
+            - Returns value if present, else returns other.
+
+                ```
+                    Optional<String> empty = Optional.empty();
+                    String result = empty.orElse("Default");
+                    // result = "Default"
+                ```
+
+        (b) orElseThrow():
+
+            - Throws NoSuchElementException if value is absent.
+
+                ```
+                    String result = Optional.of("value").orElseThrow();  // "value"
+                ```
+                
+    (4) Conditionally Executing Logic:
+
+        (a) ifPresent(Consumer<? super T>):
+
+            - Runs logic only if value is present.
+
+                ```
+                    Optional.of("John").ifPresent(val -> System.out.println("Hello, " + val));
+                ```
+
+        (b) ifPresentOrElse(...):
+
+            - Runs one block of code if value is present else it will run another.
+
+                ```
+                    Optional.ofNullable(null)
+                        .ifPresentOrElse(
+                            val -> System.out.println("Value: " + val),
+                            () -> System.out.println("No value")
+                        );
+                ```
+
+________________________________________________________________________________________________________________________
